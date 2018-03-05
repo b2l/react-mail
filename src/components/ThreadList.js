@@ -38,14 +38,14 @@ class ThreadList {
                         </div>
 
                         <div className="btn-group">
-                            <button type="button" className="btn btn-default btn-lg">
-                                <span className="glyphicon glyphicon-trash"></span>Archive
+                            <button type="button" className="btn btn-default">
+                                Archive
                             </button>
-                            <button type="button" className="btn btn-default btn-lg">
-                                <span className="glyphicon glyphicon-trash"></span>Spam
+                            <button type="button" className="btn btn-default">
+                                Spam
                             </button>
-                            <button type="button" className="btn btn-default btn-lg">
-                                <span className="glyphicon glyphicon-trash"></span>Delete
+                            <button type="button" className="btn btn-default">
+                                Delete
                             </button>
                         </div>
                     </div>
