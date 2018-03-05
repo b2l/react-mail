@@ -10,7 +10,7 @@ class ThreadPane {
         var threads = MailStore.getAll();
         return {
             threads: threads,
-            selectedThread: threads[0],
+            selectedThread: threads[0]
         }
     }
 
@@ -25,7 +25,7 @@ class ThreadPane {
 
     onSelect(thread) {
         this.setState({
-            selectedThread: thread
+            selectedThread: MailStore.getThread(thread)
         });
     }
 

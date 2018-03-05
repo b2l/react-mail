@@ -47,6 +47,12 @@ MailStore.getAll = function() {
     return _threads;
 };
 
+MailStore.getThread = function(thread) {
+    return _threads.filter(function(_t) {
+        return _t.subject === thread.subject;
+    })[0];
+}
+
 MailStore.getUnreadThread = function() {
     var count = 0;
     _threads.forEach(function(thread) {
