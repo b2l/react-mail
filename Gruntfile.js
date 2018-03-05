@@ -32,7 +32,7 @@ module.exports = function(grunt) {
                 files: [
                     {expand: true, cwd: 'src/html/', src: ['**'], dest: './build/'},
                     {expand: true, cwd: 'src/css/', src: ['**'], dest: './build/css/'},
-                    {expand: true, cwd: 'bower_components/bootstrap/dist/css', src: ['**'], dest: './build/css'}
+                    {expand: true, cwd: 'bower_components/bootstrap/dist/', src: ['**'], dest: './build/'}
                 ]
             }
         }
