@@ -794,25 +794,25 @@ module.exports = [
 
 var emails = require('./fixtures');
 
-var MailListItem = React.createClass({displayName: 'MailListItem',
+var ThreadListItem= React.createClass({displayName: 'ThreadListItem',
     render: function() {
         return (
             React.DOM.div(null, 
                 React.DOM.span( {className:"mail-list-item-sender"}, 
-                    this.props.mail.mails[this.props.mail.mails.length-1].sender
+                    this.props.thread.mails[this.props.thread.mails.length-1].sender
                 ),
                 React.DOM.span( {className:"mail-list-item-subject"}, 
-                    this.props.mail.subject
+                    this.props.thread.subject
                 ),
                 React.DOM.span( {className:"mail-list-item-date"}, 
-                    this.props.mail.mails[this.props.mail.mails.length -1].date.toString()
+                    this.props.thread.mails[this.props.thread.mails.length -1].date.toString()
                 )
             )
         );
    }
 });
 
-var MailList = React.createClass({displayName: 'MailList',
+var ThreadList = React.createClass({displayName: 'ThreadList',
     render: function() {
         function createItem(item, i) {
             return (
@@ -820,39 +820,51 @@ var MailList = React.createClass({displayName: 'MailList',
                     className:this.props.selected === item ? 'mail-list-item selected' : 'mail-list-item',
                     onClick:this.props.onSelect.bind(null, item)}
                     , 
-                    MailListItem( {mail:item} )
+                    ThreadListItem( {thread:item} )
                 )
             );
         }
         return (
             React.DOM.ul( {className:"mail-list"}, 
-                this.props.emails.map(createItem, this)
+                this.props.threads.map(createItem, this)
             )
         );
     }
 });
 
-var MailDetails = React.createClass({displayName: 'MailDetails',
+var ThreadDetails = React.createClass({displayName: 'ThreadDetails',
     getInitialState: function() {
         return {
-            hideRead: true
+            selected: 0
         }
+    },
+    keyListener: function(e) {
+        if (e.keyCode === 40 && this.state.selected < this.props.thread.mails.length - 1) {
+            this.setState({selected: this.state.selected+1});
+        }
+        if (e.keyCode === 38 && this.state.selected >= 1) {
+            this.setState({selected: this.state.selected-1});
+        }
+    },
+    componentDidMount: function() {
+        this.refs.keyListener.getDOMNode().focus();
     },
     render: function() {
         function displayMail(mail, i) {
             return (
-                MailDetailsItem( {mail:mail, key:i})
+                MailDetail( {mail:mail, key:i, selected:i === this.state.selected} )
             );
         }
         return (
-            React.DOM.div( {className:"mail-details"}, 
-                this.props.mail.mails.map(displayMail.bind(this))
+            React.DOM.div( {className:"mail-details", onKeyDown:this.keyListener}, 
+                React.DOM.input( {className:"hidden-focusable", ref:"keyListener"}),
+                this.props.thread.mails.map(displayMail.bind(this))
             )
         );
     }
 });
 
-var MailDetailsItem = React.createClass({displayName: 'MailDetailsItem',
+var MailDetail = React.createClass({displayName: 'MailDetail',
     getInitialState: function() {
         return {
             showAll: !this.props.mail.read
@@ -863,10 +875,10 @@ var MailDetailsItem = React.createClass({displayName: 'MailDetailsItem',
     },
     render: function() {
         return (
-            React.DOM.div( {className:"mail-details-item", key:this.props.i, onClick:this.onClick}, 
+            React.DOM.div( {className:this.props.selected? 'mail-details-item selected' : 'mail-details-item', key:this.props.i, onClick:this.onClick}, 
                 React.DOM.div( {className:"mail-details-item-header"}, 
-                    React.DOM.div( {className:"mail-details-item-header-sender"}, this.props.mail.sender),
-                    React.DOM.div( {className:"mail-details-item-header-date"}, this.props.mail.date.toString())
+                    React.DOM.span( {className:"mail-details-item-header-sender"}, this.props.mail.sender),
+                    React.DOM.span( {className:"mail-details-item-header-date"}, this.props.mail.date.toString())
                 ),
                 React.DOM.div( {className:"content"}, 
                     this.state.showAll ? this.props.mail.content : this.props.mail.content.substr(0, 10)+'...'
@@ -879,21 +891,21 @@ var MailDetailsItem = React.createClass({displayName: 'MailDetailsItem',
 var MailApp = React.createClass({displayName: 'MailApp',
     getInitialState: function() {
         return {
-            emails: emails,
-            selectedEmail: emails[0]
+            threads: emails,
+            selectedThread: emails[0]
         }
     },
-    onSelect: function(mail) {
+    onSelect: function(thread) {
         this.setState({
-            selectedEmail: mail
+            selectedThread: thread
         });
    },
    render: function() {
        return (
             React.DOM.div(null, 
                 React.DOM.h1(null, "Mails"),
-                MailList( {onSelect:this.onSelect, emails:this.state.emails, selected:this.state.selectedEmail}),
-                MailDetails( {mail:this.state.selectedEmail} )
+                ThreadList( {onSelect:this.onSelect, threads:this.state.threads, selected:this.state.selectedThread}),
+                ThreadDetails( {thread:this.state.selectedThread} )
             )
        );
    }

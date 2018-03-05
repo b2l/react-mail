@@ -54,9 +54,23 @@ $white: #f3f3f3;
     border: 1px dashed #c2c2c2;
     padding: 5px;
     margin: 5px;
+
+    &.selected {
+      border: 1px solid #2792DF;
+    }
   }
 
   .mail-details-item-header-date {
     float: right;
   }
+
+}
+
+.hidden {
+  display: none;
+}
+
+.hidden-focusable {
+  position: fixed;
+  top: -1000px;
 }
