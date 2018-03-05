@@ -1,0 +1,38 @@
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0; }
+  ul li {
+    padding: 3px 5px; }
+    ul li:hover {
+      text-decoration: underline;
+      background: rgba(0, 0, 0, 0.1); }
+
+.selected.mail-list-item {
+  background: #333333;
+  color: #f3f3f3; }
+  .selected.mail-list-item:hover {
+    text-decoration: none;
+    background: #333333;
+    cursor: default; }
+
+.mail-list {
+  border: 1px solid #333333;
+  margin-bottom: 5px; }
+  .mail-list .mail-list-item {
+    cursor: pointer; }
+  .mail-list .mail-list-item-sender {
+    display: inline-block;
+    width: 300px; }
+  .mail-list .mail-list-item-date {
+    float: right; }
+
+.mail-details {
+  border: 1px solid #333333;
+  padding: 5px; }
+  .mail-details .mail-details-item {
+    border: 1px dashed #c2c2c2;
+    padding: 5px;
+    margin: 5px; }
+  .mail-details .mail-details-item-header-date {
+    float: right; }
