@@ -1,9 +1,21 @@
 /** @jsx React.DOM */
 
 var React = require('react');
+var MailAction = require('../actions/MailActions');
+
 class NewMail {
 
     sendMail(e) {
+        e.preventDefault();
+        var mail = {
+            subject: e.target.subject.value,
+            to: e.target.to.value,
+            content: e.target.content.value
+        };
+
+        e.target.reset();
+
+        MailAction.sendMail(mail);
     }
 
     render() {
@@ -16,19 +28,19 @@ class NewMail {
                     <div className="panel-body">
                         <div className="form-group">
                             <label htmlFor="mail-to">To: </label>
-                            <input type="text" className="form-control new-mail-to" id="mail-to" />
+                            <input name="to" type="text" className="form-control new-mail-to" id="mail-to" />
                         </div>
 
                         <div className="form-group">
                             <label htmlFor="new-mail-subject">Subject</label>
-                            <input type="text" className="form-control subject" />
+                            <input name="subject" type="text" className="form-control subject" />
                         </div>
 
-                        <textarea className="new-mail-content"></textarea>
+                        <textarea name="content" className="new-mail-content"></textarea>
                     </div>
                     <div className="panel-footer">
                         <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" className="btn btn-primary">Save changes</button>
+                        <input type="submit" className="btn btn-primary" value="Save" />
                     </div>
                 </form>
             </div>

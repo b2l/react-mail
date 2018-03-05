@@ -19,8 +19,13 @@ class ThreadPane {
             threads: MailStore.getAll()
         });
     }
+
     componentDidMount() {
         MailStore.addChangeListener(this.updateThread);
+    }
+
+    componentWillUnmount() {
+        MailStore.removeChangeListener(this.updateThread);
     }
 
     onSelect(thread) {

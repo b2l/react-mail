@@ -9,9 +9,9 @@ var MailActions = {
         });
     },
 
-    createMail: function(mailObj) {
+    sendMail: function(mailObj) {
         AppDispatcher.handleViewAction({
-            actionType: 'newMail',
+            actionType: 'sendMail',
             mail: mailObj
         });
     }

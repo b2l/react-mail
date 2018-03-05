@@ -33,6 +33,7 @@ function createNewMail(mail) {
             mails: [mail]
         });
     }
+
 }
 
 var MailStore = EventEmitter.prototype;
@@ -87,14 +88,13 @@ MailStore.removeChangeListener = function(callback) {
 AppDispatcher.register(function(payload) {
 
     var action = payload.action;
-    var text;
 
     switch (action.actionType) {
         case 'markAsRead':
             markAsRead(action.mailId);
             MailStore.emitChange();
             break;
-        case 'newMail':
+        case 'sendMail':
             createNewMail(action.mail);
             MailStore.emitChange();
             break;
