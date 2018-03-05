@@ -50,7 +50,7 @@ class ThreadList {
                         </div>
                     </div>
                 </div>
-                <input className="" ref="keyListener" onKeyDown={this.onKeyDown} />
+                <input className="hidden-focusable" ref="keyListener" onKeyDown={this.onKeyDown} />
                 <table className="table table-condensed" >
                     {threads}
                 </table>
