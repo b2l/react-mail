@@ -1,0 +1,25 @@
+.unread {
+    font-weight: bold;
+}
+
+.hidden-focusable {
+    position: fixed;
+    top: -1000px;
+}
+
+.table .primary {
+    background-color: #428BCA;
+    color: white;
+}
+
+.mail-details {
+    padding: 20px;
+}
+
+.btn-toolbar {
+    padding: 10px;
+}
+
+.btn-toolbar .checkbox {
+    padding: 0 0 0 5px;
+}
