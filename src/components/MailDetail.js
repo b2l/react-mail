@@ -2,14 +2,23 @@
 var React = require('react');
 var MailAction = require('../actions/MailActions');
 var moment = require('moment');
+
 class MailDetail {
-    onClick() {
-        MailAction.markAsRead(this.props.mail.id)
+
+    getInitialState() {
+        return {
+            open: !this.props.mail.read
+        }
     }
+
+    onClick() {
+        this.setState({
+            open: !this.state.open
+        })
+    }
+
     render() {
         var className = "panel panel-default";
-        if (this.props.selected)
-            className += ' panel-primary' ;
 
         var time = moment(this.props.mail.date).fromNow();
         return (
@@ -19,7 +28,7 @@ class MailDetail {
                     <span className="mail-details-item-header-date">{time}</span>
                 </div>
                 <div className="panel-body">
-                    {this.props.mail.read ?  this.props.mail.content.substr(0, 10)+'...' : this.props.mail.content}
+                    {this.state.open ? this.props.mail.content : this.props.mail.content.substr(0, 10)+'...'}
                 </div>
             </div>
             );

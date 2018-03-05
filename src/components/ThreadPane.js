@@ -32,7 +32,7 @@ class ThreadPane {
     render() {
         return (
             <div>
-                <ThreadList onSelect={this.onSelect} threads={this.state.threads} selected={this.state.selectedThread}/>
+                <ThreadList onSelect={this.onSelect} threads={this.state.threads} selected={this.state.threads.indexOf(this.state.selectedThread)} />
                 <ThreadDetails thread={this.state.selectedThread} />
             </div>
         );

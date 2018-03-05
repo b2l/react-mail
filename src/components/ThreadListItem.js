@@ -2,7 +2,9 @@
 
 var React = require('react');
 var moment = require('moment');
+
 class ThreadListItem {
+
     render() {
         var unreadMails = this.props.thread.mails.filter(function(mail) {return !mail.read});
         var isUnread = unreadMails.length > 0;
@@ -23,6 +25,7 @@ class ThreadListItem {
             </tr>
         );
     }
+
 }
 
 module.exports = React.createClass(ThreadListItem.prototype);
