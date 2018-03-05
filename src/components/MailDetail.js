@@ -14,7 +14,10 @@ class MailDetail {
     onClick() {
         this.setState({
             open: !this.state.open
-        })
+        });
+
+        if (!this.props.mail.read)
+            MailAction.markAsRead(this.props.mail.id);
     }
 
     render() {
